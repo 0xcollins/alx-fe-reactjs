@@ -5,7 +5,7 @@ function AddRecipeForm() {
   const [formData, setFormData] = useState({
     title: '',
     ingredients: '',
-    instructions: ''
+    steps: '' // Added 'steps' to track preparation steps
   });
 
   // State to track validation errors
@@ -13,7 +13,7 @@ function AddRecipeForm() {
 
   // Handle input change
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target;  // Use target.value to get the input value
     setFormData({
       ...formData,
       [name]: value
@@ -32,8 +32,8 @@ function AddRecipeForm() {
       validationErrors.ingredients = 'At least one ingredient is required';
     }
 
-    if (!formData.instructions) {
-      validationErrors.instructions = 'Instructions are required';
+    if (!formData.steps) {
+      validationErrors.steps = 'Preparation steps are required';  // Validate 'steps'
     }
 
     // Set errors if any validation fails
@@ -56,7 +56,7 @@ function AddRecipeForm() {
       setFormData({
         title: '',
         ingredients: '',
-        instructions: ''
+        steps: ''  // Reset 'steps'
       });
       setErrors({});
     }
@@ -91,16 +91,16 @@ function AddRecipeForm() {
           {errors.ingredients && <p className="text-red-500 text-sm mt-1">{errors.ingredients}</p>}
         </div>
 
-        {/* Instructions Input */}
+        {/* Preparation Steps Input */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Instructions</label>
+          <label className="block text-sm font-medium text-gray-700">Preparation Steps</label>
           <textarea
-            name="instructions"
-            value={formData.instructions}
+            name="steps"  // Updated name to 'steps'
+            value={formData.steps}  // Bind 'steps' value to the formData state
             onChange={handleChange}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
           ></textarea>
-          {errors.instructions && <p className="text-red-500 text-sm mt-1">{errors.instructions}</p>}
+          {errors.steps && <p className="text-red-500 text-sm mt-1">{errors.steps}</p>}
         </div>
 
         {/* Submit Button */}
